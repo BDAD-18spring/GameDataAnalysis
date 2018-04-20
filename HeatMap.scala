@@ -9,7 +9,3 @@ val era = ERAmap.map(tuple => tuple._2 + "," + tuple._3)
 
 mir.saveAsTextFile("pubgETL/mir_death.csv")
 era.saveAsTextFile("pubgETL/era_death.csv")
-
-
-
-
