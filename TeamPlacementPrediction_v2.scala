@@ -14,7 +14,7 @@ val numClasses = 2
 val categoricalFeaturesInfo = Map[Int, Int]()
 val numTrees = 10 // Use more in practice.
 val featureSubsetStrategy = "auto" // Let the algorithm choose.
-val impurity = "variance"
+val impurity = "entropy"
 val maxDepth = 4
 val maxBins = 32
 
