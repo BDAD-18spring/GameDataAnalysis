@@ -12,7 +12,7 @@ val (trainingData, testData) = (splits(0), splits(1))
 // Empty categoricalFeaturesInfo indicates all features are continuous.
 val numClasses = 2
 val categoricalFeaturesInfo = Map[Int, Int]()
-val numTrees = 50 // Use more in practice.
+val numTrees = 6 // Use more in practice.
 val featureSubsetStrategy = "auto" // Let the algorithm choose.
 val impurity = "gini"
 val maxDepth = 4
@@ -30,7 +30,7 @@ val labelAndPreds = testData.map { point =>
 //val testErr = labelAndPreds.filter(r => r._1 != r._2).count.toDouble / testData.count()
 //println(s"Test Error = $testErr")
 
-val testMSE = labelsAndPredictions.map{ case(v, p) => math.pow((v - p), 2)}.mean()
+val testMSE = labelsAndPreds.map{ case(v, p) => math.pow((v - p), 2)}.mean()
 println("Test Mean Squared Error = " + testMSE)
 println(s"Learned classification forest model:\n ${model.toDebugString}")
 
