@@ -40,6 +40,7 @@ val evaluator = new RegressionEvaluator()
   .setLabelCol("label")
   .setPredictionCol("prediction")
   .setMetricName("rmse")
+
 val rmse = evaluator.evaluate(predictions)
 println(s"Root Mean Squared Error (RMSE) on test data = $rmse")
 
