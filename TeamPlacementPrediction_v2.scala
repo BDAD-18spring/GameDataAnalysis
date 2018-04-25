@@ -1,38 +1,37 @@
-import org.apache.spark.ml.Pipeline
-import org.apache.spark.ml.evaluation.RegressionEvaluator
-import org.apache.spark.ml.feature.VectorIndexer
-import org.apache.spark.ml.regression.{RandomForestRegressionModel, RandomForestRegressor}
+import org.apache.spark.mllib.tree.RandomForest
+import org.apache.spark.mllib.tree.model.RandomForestModel
+import org.apache.spark.mllib.util.MLUtils
 
-// Load and parse the data file, converting it to a DataFrame.
-val data = spark.read.format("libsvm").load("matches/libsvm/libsvm_data.txt")
-
-// Automatically identify categorical features, and index them.
-// Set maxCategories so features with > 4 distinct values are treated as continuous.
-val featureIndexer = new VectorIndexer().setInputCol("features").setOutputCol("indexedFeatures").setMaxCategories(4).fit(data)
-
-// Split the data into training and test sets (30% held out for testing).
-val Array(trainingData, testData) = data.randomSplit(Array(0.7, 0.3))
+// Load and parse the data file.
+val data = MLUtils.loadLibSVMFile(sc, "matches/libsvm/libsvm_data.txt")
+// Split the data into training and test sets (30% held out for testing)
+val splits = data.randomSplit(Array(0.7, 0.3))
+val (trainingData, testData) = (splits(0), splits(1))
 
 // Train a RandomForest model.
-val rf = new RandomForestRegressor().setLabelCol("label").setFeaturesCol("indexedFeatures")
+// Empty categoricalFeaturesInfo indicates all features are continuous.
+val numClasses = 2
+val categoricalFeaturesInfo = Map[Int, Int]()
+val numTrees = 3 // Use more in practice.
+val featureSubsetStrategy = "auto" // Let the algorithm choose.
+val impurity = "gini"
+val maxDepth = 4
+val maxBins = 32
 
-// Chain indexer and forest in a Pipeline.
-val pipeline = new Pipeline().setStages(Array(featureIndexer, rf))
+val model = RandomForest.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
+  numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins)
 
-// Train model. This also runs the indexer.
-val model = pipeline.fit(trainingData)
+// Evaluate model on test instances and compute test error
+val labelAndPreds = testData.map { point =>
+  val prediction = model.predict(point.features)
+  (point.label, prediction)
+}
+val testErr = labelAndPreds.filter(r => r._1 != r._2).count.toDouble / testData.count()
+println(s"Test Error = $testErr")
+println(s"Learned classification forest model:\n ${model.toDebugString}")
 
-// Make predictions.
-val predictions = model.transform(testData)
+// Save and load model
+model.save(sc, "RandomForestModel/myRandomForestRegressionModel")
 
-// Select example rows to display.
-predictions.select("prediction", "label", "features").show(5)
+// val sameModel = RandomForestModel.load(sc, "target/tmp/myRandomForestClassificationModel")
 
-// Select (prediction, true label) and compute test error.
-val evaluator = new RegressionEvaluator().setLabelCol("label").setPredictionCol("prediction").setMetricName("rmse")
-
-val rmse = evaluator.evaluate(predictions)
-println(s"Root Mean Squared Error (RMSE) on test data = $rmse")
-
-val rfModel = model.stages(1).asInstanceOf[RandomForestRegressionModel]
-println(s"Learned regression forest model:\n ${rfModel.toDebugString}")
