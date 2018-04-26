@@ -18,7 +18,7 @@ val impurity = "variance"
 val maxDepth = 4
 val maxBins = 32
 
-val model = RandomForest.trainClassifier(trainingData, numClasses, categoricalFeaturesInfo,
+val model = RandomForest.trainRegressor(trainingData, categoricalFeaturesInfo,
   numTrees, featureSubsetStrategy, impurity, maxDepth, maxBins)
 
 // Evaluate model on test instances and compute test error
