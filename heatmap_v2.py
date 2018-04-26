@@ -46,9 +46,11 @@ bg = imread("./pic/miramar.jpg")
 fig, ax = plt.subplots(1,1,figsize=(15,15))
 ax.imshow(bg)
 sns.kdeplot(mira_sample["victim_position_x"], mira_sample["victim_position_y"], n_levels=100)
+plt.savefig('mir_death.png')
 
 # heatmap of eran
 bg = imread("./pic/erangel.jpg")
 fig, ax = plt.subplots(1,1,figsize=(15,15))
 ax.imshow(bg)
 sns.kdeplot(eran_sample["victim_position_x"], eran_sample["victim_position_y"], n_levels=100)
+plt.savefig('era_death.png')
