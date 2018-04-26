@@ -14,7 +14,7 @@ val numClasses = 2
 val categoricalFeaturesInfo = Map[Int, Int]()
 val numTrees = 10 // Use more in practice.
 val featureSubsetStrategy = "auto" // Let the algorithm choose.
-val impurity = "entropy"
+val impurity = "variance"
 val maxDepth = 4
 val maxBins = 32
 
@@ -33,6 +33,17 @@ val labelAndPreds = testData.map { point =>
 val testMSE = labelAndPreds.map{ case(v, p) => math.pow((v - p), 2)}.mean()
 println("Test Mean Squared Error = " + testMSE)
 println(s"Learned classification forest model:\n ${model.toDebugString}")
+
+val vector = model.featureImportances()
+println(" ")
+println("-----------Feature Importnaces------------")
+println("player_assists: " + vector(0))
+println("player_dbno: " + vector(1))
+println("player_dist_ride: " + vector(2))
+println("player_dist_walk: " + vector(3))
+println("player_dmg: " + vector(4))
+println("player_kills: " + vector(5))
+println("player_survive_time: " + vector(6))
 
 // Save and load model
 model.save(sc, "RandomForestModel/myRandomForestRegressionModel")
