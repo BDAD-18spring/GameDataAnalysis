@@ -1,21 +1,25 @@
 # import libraries
 import numpy as np
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+
 import pandas as pd
 import seaborn as sns
-%matplotlib inline
+# %matplotlib inline
 
 from scipy.misc.pilutil import imread
 
 # import only a few datasets for now
 deaths1 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_0.csv")
-deaths2 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_1.csv")
-deaths3 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_2.csv")
-deaths4 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_3.csv")
-deaths5 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_4.csv")
+#deaths2 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_1.csv")
+#deaths3 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_2.csv")
+#deaths4 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_3.csv")
+#deaths5 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_4.csv")
 
-deaths = pd.concat([deaths1, deaths2, death3, death4, death5])
+#deaths = pd.concat([deaths1, deaths2, deaths3, deaths4, deaths5])
 
+deaths = deaths1
 deaths.head
 
 # restrict to miramar
@@ -38,7 +42,7 @@ mira_sample = miramar[miramar["time"] < 100].sample(n)
 eran_sample = erangel[erangel["time"] < 100].sample(n)
 
 # heatmap of mira
-bg = imread("./pic/input/miramar.jpg")
+bg = imread("./pic/miramar.jpg")
 fig, ax = plt.subplots(1,1,figsize=(15,15))
 ax.imshow(bg)
 sns.kdeplot(mira_sample["victim_position_x"], mira_sample["victim_position_y"], n_levels=100)
