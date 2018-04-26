@@ -12,14 +12,13 @@ from scipy.misc.pilutil import imread
 
 # import only a few datasets for now
 deaths1 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_0.csv")
-#deaths2 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_1.csv")
-#deaths3 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_2.csv")
-#deaths4 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_3.csv")
-#deaths5 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_4.csv")
+deaths2 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_1.csv")
+deaths3 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_2.csv")
+deaths4 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_3.csv")
+deaths5 = pd.read_csv("~/BDAD/PUBGdata/deaths/kill_match_stats_final_4.csv")
+deaths = pd.concat([deaths1, deaths2, deaths3, deaths4, deaths5])
 
-#deaths = pd.concat([deaths1, deaths2, deaths3, deaths4, deaths5])
-
-deaths = deaths1
+# deaths = deaths1
 deaths.head
 
 # restrict to miramar
@@ -46,11 +45,11 @@ bg = imread("./pic/miramar.jpg")
 fig, ax = plt.subplots(1,1,figsize=(15,15))
 ax.imshow(bg)
 sns.kdeplot(mira_sample["victim_position_x"], mira_sample["victim_position_y"], n_levels=100)
-plt.savefig('mir_death.png')
+plt.savefig('./pic/mir_death.png')
 
 # heatmap of eran
 bg = imread("./pic/erangel.jpg")
 fig, ax = plt.subplots(1,1,figsize=(15,15))
 ax.imshow(bg)
 sns.kdeplot(eran_sample["victim_position_x"], eran_sample["victim_position_y"], n_levels=100)
-plt.savefig('era_death.png')
+plt.savefig('./pic/era_death.png')
