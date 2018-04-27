@@ -37,7 +37,7 @@ println(s"Root Mean Squared Error (RMSE) on test data = $rmse")
 val rfModel = model.stages(1).asInstanceOf[RandomForestRegressionModel]
 println(s"Learned regression forest model:\n ${rfModel.toDebugString}")
 
-val vector = rfModel.featureImportances()
+val vector = rfModel.featureImportances
 println(" ")
 println("-----------Feature Importnaces------------")
 println("player_assists: " + vector(0))
@@ -49,7 +49,7 @@ println("player_kills: " + vector(5))
 println("player_survive_time: " + vector(6))
 
 // Save and load model
-model.save(sc, "RandomForestModel/myRandomForestRegressionModel")
+//model.save(sc, "RandomForestModel/myRandomForestRegressionModel")
 
 // val sameModel = RandomForestModel.load(sc, "target/tmp/myRandomForestClassificationModel")
 
