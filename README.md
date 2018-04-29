@@ -44,3 +44,8 @@ The features' IDs and their names in LIBSVM output are listed below:
 | 6          | player_kills        |
 | 7          | player_survive_time |
 
+
+
+
+
+
