@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Multi-Player Online Battle Games Matches and Players Analyzing Application</title>
+
+
+<!-- Bootstrap -->
+    <link href="/static/theme/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/theme/css/grayscale2.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <!-- Custom fonts for this template -->
+    <link href="/static/theme/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/drilldown.js"></script>
+    <script src="https://highcharts.github.io/export-csv/export-csv.js"></script>
+
+ <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107119024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107119024-1');
+</script>
+
+<!-- Any custom CSS styling you want to do and override links, do so here -->
+<style>
+  body {
+    width: 100%;
+    height: 100%;
+    font-family: "Lora", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: black;
+    background-color: white;
+  }
+</style>
+
+</head>
+
+<body>
+
+<br>
+<br>
+<br>
+<div class="container-fluid">
+
+                    <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2><small>Multi-Player Online Battle Games <br> Matches and Players Analyzing Application</small></h2>
+                        <h1 class="page-header">
+                            Player Team Placement & Skill Score
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-4 col-sm-6">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-thumbs-up fa-2x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div><h3>{{ result | safe }} <small style="color:white"></small></h3></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-lg-6 col-md-4 col-sm-6">
+                        <!--img src="{{ image | safe }}" align="center" style="width: 80%; height: 80%"/-->
+                        <!--img src="/static/skillradar/skillradar.png" alt="..." width="500"-->
+                        <img src="data:image/png;base64,{{ image }}" width="500">
+
+                    </div>
+                </div>
+
+                <br>
+
+
+                <div class="row">
+                    <div class="col-sm-10 col-lg-10">
+                      <button type="button" onclick="location.href='http://linserv2.cims.nyu.edu:40555/player'" class="background-color: #555555">Back</button>
+                    </div>
+                </div>
+
+<br>
+
+
+</div>
+      <hr>
+<div class="container-fluid">
+    <footer>
+        Copyright &copy; NYU BDAD SPRING 2018
+    </footer>
+</div>
+
+
+  <!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<!-- Custom scripts for this template -->
+<script src="/static/theme/js/grayscale.js"></script>
+<script src="/static/theme/vendor/bootstrap/js/bootstrap.js"></script>
+
+</body>
+</html>

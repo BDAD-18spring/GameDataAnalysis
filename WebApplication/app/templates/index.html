@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+
+
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Multi-Player Online Battle Games Matches and Players Analyzing Application</title>
+
+    <!-- Bootstrap -->
+
+    <link href="/static/theme/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/theme/css/grayscale2.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="/static/theme/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Code for easy autocomplete -->
+    <link rel="stylesheet" href="/static/css/easy-autocomplete.css">
+    <link rel="stylesheet" href="/static/css/easy-autocomplete.themes.css">
+
+    <!-- Code for Date Picker -->
+    <link rel="stylesheet"
+          href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="/static/js/transition.js"></script>
+    <script type="text/javascript" src="/static/js/collapse.js"></script>
+    <script type="text/javascript" src="/static/js/moment.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js"></script>
+
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107119024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'UA-107119024-1');
+</script>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="background-color:#303030;">
+    <div id="particles-js"></div>
+
+    <script>
+            /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particles-js', '/static/js/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+    </script>
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/">
+                  <font style="color:#c0c0c0"> &nbsp Multi-Player Online Battle Games <br> &nbsp Matches and Players Analyzing Application </font>
+              </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                  <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                  <li class="hidden">
+                      <a href="#page-top"></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/"><font style="color:#c0c0c0"><strong>HOME</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/death"><font style="color:#c0c0c0"><strong>DEATH</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/player"><font style="color:#c0c0c0"><strong>PLAYER</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/match"><font style="color:#c0c0c0"><strong>MATCH</strong></font></a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+  </nav>
+
+
+
+  <div class="row">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  </div>
+
+  <!--Container for rest of body-->
+  <div class="container">
+
+    <!--Custom padding across top -->
+    <div class="col-xs-12">
+        <br>
+        <br>
+        <br>
+    </div>
+
+
+    <section class="container content-section text-center">
+      <div class="row">
+        <div class="col-lg-8 col-lg-offset-2">
+            <h3>Select a service to start</h3>
+          </div>
+      </div>
+
+      <!-- Carousel Begins -->
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+            <div class="item active" align="center" >
+              <a href="{{ url_for('death') }}">
+              <img src="/static/images/pubgmap.jpg" alt="...">
+              <div class="carousel-caption" style="color:white">
+                <h3>PUBG DEATH HEATMAP</h3>
+              </div>
+              </a>
+            </div>
+            <div class="item" align="center" >
+              <a href="{{ url_for('player') }}">
+              <img src="/static/images/pubgpan.jpg" alt="...">
+              <div class="carousel-caption" style="color:white">
+                <h3>PUBG PLAYER ANALYSIS</h3>
+              </div>
+              </a>
+            </div>
+            <div class="item" align="center" >
+              <a href="{{ url_for('match') }}">
+              <img src="/static/images/dota2.jpg" alt="...">
+              <div class="carousel-caption" style="color:white">
+                <h3>DOTA2 MATCH ANALYSIS</h3>
+              </div>
+              </a>
+            </div>
+          </div>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+              <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+              <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+            </div>
+      <!-- Carousel Ends -->
+
+    </section>
+
+    <hr>
+
+    <footer>
+        <font style="color:#c0c0c0">Copyright &copy; NYU BDAD SPRING 2018</font>
+    </footer>
+  </div>
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="/static/js/jquery.easy-autocomplete.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/static/theme/js/grayscale.js"></script>
+
+<!-- core bootstrap from vendor -->
+
+<script src="/static/theme/vendor/bootstrap/js/bootstrap.js"></script>
+
+<!-- jquery for the accordion style widget -->
+<script src="/static/theme/js/accordion.js"></script>
+
+
+</body>
+</html>

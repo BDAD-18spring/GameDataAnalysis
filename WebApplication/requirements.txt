@@ -1,0 +1,8 @@
+python==2.7.13
+pyspark==2.2.0
+Flask==0.12
+Flask-API==1.0
+flask_wtf
+wtforms
+flask_bootstrap
+matplotlib

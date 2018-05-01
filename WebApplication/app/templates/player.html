@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+
+
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Multi-Player Online Battle Games Matches and Players Analyzing Application</title>
+
+    <!-- Bootstrap -->
+
+    <link href="/static/theme/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/static/theme/css/grayscale2.css" rel="stylesheet">
+    <link href="/static/theme/css/accordion.css" rel="stylesheet">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Custom fonts for this template -->
+    <link href="/static/theme/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+          type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Cabin:700' rel='stylesheet' type='text/css'>
+
+    <!-- Code for easy autocomplete -->
+    <link rel="stylesheet" href="/static/css/easy-autocomplete.css">
+    <link rel="stylesheet" href="/static/css/easy-autocomplete.themes.css">
+
+    <!-- Code for Date Picker -->
+    <link rel="stylesheet"
+          href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="/static/js/transition.js"></script>
+    <script type="text/javascript" src="/static/js/collapse.js"></script>
+    <script type="text/javascript" src="/static/js/moment.js"></script>
+    <script type="text/javascript" src="/static/js/bootstrap-datetimepicker.js"></script>
+
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107119024-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments)};
+  gtag('js', new Date());
+  gtag('config', 'UA-107119024-1');
+</script>
+
+</head>
+
+<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" style="background-color:#303030;">
+
+  <div id="particles-js"></div>
+
+    <script>
+            /* particlesJS.load(@dom-id, @path-json, @callback (optional)); */
+        particlesJS.load('particles-js', '/static/js/particles.json', function() {
+          console.log('callback - particles.js config loaded');
+        });
+    </script>
+
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/">
+                  <font style="color:#c0c0c0"> &nbsp Multi-Player Online Battle Games <br> &nbsp Matches and Players Analyzing Application </font>
+              </a>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
+              <ul class="nav navbar-nav">
+                  <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                  <li class="hidden">
+                      <a href="#page-top"></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/"><font style="color:#c0c0c0"><strong>HOME</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/death"><font style="color:#c0c0c0"><strong>DEATH</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/player"><font style="color:#c0c0c0"><strong>PLAYER</strong></font></a>
+                  </li>
+                  <li>
+                      <a class="navbar-brand page-scroll" href="http://linserv2.cims.nyu.edu:40555/match"><font style="color:#c0c0c0"><strong>MATCH</strong></font></a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container -->
+  </nav>
+
+  <div class="row">
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+  </div>
+
+
+<!--Container for rest of body-->
+<div class="container">
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">
+                PUBG : ANALYZE PLAYER 
+            </h2>
+        </div>
+    </div>
+
+    <!--Beginning Form and Info Panel on same row-->
+    <div class="row">
+        <!--Begin Form Row-->
+        <div class="col-xs-12 col-md-6 col-lg-8 pull-left">
+
+            {% block content %}
+
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"
+                <span
+                        aria-hidden="true">&times;</span></button>
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            <!-- Begin Form  -->
+                      <form method="post" action="{{ url_for('player') }}">
+                        {{ form.hidden_tag() }}
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_id.label |safe }}
+                           {{ form.player_id(placeholder="Enter ID of Player", class="form-control")|safe }}
+                  <div id="data1"></div>
+                    {% if form.player_id.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_id.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_assists.label |safe }}
+                           {{ form.player_assists(placeholder="Enter number of assists of player", class="form-control")|safe }}
+                  <div id="data2"></div>
+                    {% if form.player_assists.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_assists.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_dbno.label |safe }}
+                           {{ form.player_dbno(placeholder="Enter number of dbno of player", class="form-control")|safe }}
+                  <div id="data3"></div>
+                    {% if form.player_dbno.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_dbno.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_dist_ride.label |safe }}
+                           {{ form.player_dist_ride(placeholder="Enter ride distance of player", class="form-control")|safe }}
+                  <div id="data4"></div>
+                    {% if form.player_dist_ride.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_dist_ride.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_dist_walk.label |safe }}
+                           {{ form.player_dist_walk(placeholder="Enter walk distance of player", class="form-control")|safe }}
+                  <div id="data5"></div>
+                    {% if form.player_dist_walk.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_dist_walk.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_dmg.label |safe }}
+                           {{ form.player_dmg(placeholder="Enter damages of player", class="form-control")|safe }}
+                  <div id="data6"></div>
+                    {% if form.player_dmg.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_dmg.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_kills.label |safe }}
+                           {{ form.player_kills(placeholder="Enter number of kills of player", class="form-control")|safe }}
+                  <div id="data7"></div>
+                    {% if form.player_kills.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_kills.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+                          <div class="form-group row">
+                              <div class="col-sm-10 col-lg-10">
+                 {{ form.player_survive_time.label |safe }}
+                           {{ form.player_survive_time(placeholder="Enter survive time of player", class="form-control")|safe }}
+                  <div id="data8"></div>
+                    {% if form.player_survive_time.errors %}
+                      <ul class="alert alert-info alert-dismissible" role="alert">
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close"<span
+                        aria-hidden="true">&times;</span></button>
+                      {% for error in form.player_survive_time.errors %}
+                        <strong>{{ error }}</strong>
+                      {% endfor %}
+                      </ul>
+                    {% endif %}
+                              </div>
+                          </div>
+
+
+              <div class="form-group row">
+                <div class="col-sm-10 col-lg-10">
+                  <button type="submit" class="btn btn-info">Submit</button>
+                </div>
+              </div>
+            </form>
+            <!-- End Form -->
+            {% endblock %}
+
+        </div><!--Form End-->
+
+
+        <!--Info Panel Beg-->
+        <div class="col-xs-12 col-md-6 pull-right col-lg-4">
+            <h3>Information Panel</h3>
+            <div class="panel-group wrap" id="accordion" role="tablist" aria-multiselectable="true">
+
+                <div class="panel">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                About Player Analysis
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+                            Based on players behaviors, the team placement of a player can be rendered based on analyzing weights of differnet behaviours by regression method. <br>
+                            Skills are assigned with weighted according to their contributions to matches. A radar plot that shows players skill points is developed in this part, which is useful for players to discover their skills to be improved.
+                        </div>
+                    </div>
+                </div>
+                <!-- end of panel -->
+
+                <div class="panel">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                Model
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingThree">
+                        <div class="panel-body">
+                            RandomForestRegressor
+                        </div>
+                    </div>
+                </div>
+                <!-- end of panel -->
+
+                <div class="panel">
+                    <div class="panel-heading" role="tab" id="headingFour">
+                        <h4 class="panel-title">
+                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion"
+                               href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                Data Source
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel"
+                         aria-labelledby="headingFour">
+                        <div class="panel-body">
+                            Obtained via <a href="https://pubgtracker.com/site-api">PUBG Tracker Battlegrounds API</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end of panel -->
+
+            </div>
+            <!-- end of #accordion -->
+        </div>
+
+    </div><!--row-->
+
+
+    <hr>
+
+    <footer>
+        Copyright &copy; NYU BDAD SPRING 2018
+    </footer>
+</div>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="/static/js/jquery.easy-autocomplete.min.js"></script>
+
+<!-- Custom scripts for this template -->
+<script src="/static/theme/js/grayscale.js"></script>
+
+<!-- core bootstrap from vendor -->
+
+<script src="/static/theme/vendor/bootstrap/js/bootstrap.js"></script>
+
+<!-- jquery for the accordion style widget -->
+<script src="/static/theme/js/accordion.js"></script>
+
+
+</body>
+</html>
