@@ -2,7 +2,7 @@
 
 Game data analysis for PUBG and DOTA2
 
-![UI Rendering](https://github.com/BDAD-18spring/GameDataAnalysis/blob/master/Web Application Screenshots/1 - index.png)
+![UI Rendering](https://github.com/BDAD-18spring/GameDataAnalysis/blob/master/WebApplicationScreenshots/1_index.png)
 
 ## Data Source
 
