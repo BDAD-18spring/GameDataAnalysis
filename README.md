@@ -63,3 +63,8 @@ The features' IDs and their names are listed below:
 
 ## Web Application
 Follow commands in `WebApplication/run.sh` to start the web app server for interactive use of our project's application.
+
+
+##Author
+* [Gen Xiang](gx271@nyu.edu)(gx271@nyu.edu) 
+* [Nan Liu](nl1554@nyu.edu)(nl1554@nyu.edu)
