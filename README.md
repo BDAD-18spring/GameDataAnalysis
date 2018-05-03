@@ -7,7 +7,7 @@ Game data analysis for PUBG and DOTA2
 ## Data Source
 
 - PUBG matches and death data pulled from [TRN PUBG Tracker API](https://pubgtracker.com/site-api)
-- DoTA2 matches data obtained from YASP's data dumps that located on Academic Torrents (http://academictorrents.com)
+- DoTA2 matches data obtained from YASP's data dumps that located on [Academic Torrents](http://academictorrents.com)
 
 ## Environment
 
@@ -65,6 +65,6 @@ The features' IDs and their names are listed below:
 Follow commands in `WebApplication/run.sh` to start the web app server for interactive use of our project's application.
 
 
-##Author
+## Author
 * [Gen Xiang](gx271@nyu.edu)(gx271@nyu.edu) 
 * [Nan Liu](nl1554@nyu.edu)(nl1554@nyu.edu)
